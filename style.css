@@ -36,12 +36,13 @@ h1 {
 
 .btn {
    width: 25px;
-   height: 50px;
+   height: 40px;
    background-color: white;
    color: black;
    border: 1px solid gray;
    text-align: center;
    cursor: pointer;
+   padding-top: 13px;
 }
 
 #display {
@@ -50,12 +51,19 @@ h1 {
    height: 60px;
    font-size: 42px;
    overflow: hidden;
+   padding: 10px 5px 0 5px;
+   border-radius: 10px 10px 0 0;
 }
 
 #reset {
    width: 52px;
 }
 
+#zero {
+   width: 52px;
+   border-radius: 0 0 0 10px;
+}
+
 #equal {
-   width: 50px;
+   border-radius: 0 0 10px 0;
 }

@@ -9,10 +9,7 @@ const operatorBtn = document.getElementsByClassName('btn operator');
 var digit = '0';
 //var pendingDigit;
 var stringArray = [];
-
-resetBtn.addEventListener('click', reset);
-backspaceBtn.addEventListener('click', backspace);
-decimalBtn.addEventListener('click', decimal);
+const symbols = ['+', '-', '*', '/'];
 
 // adding click event listener to each button
 for (let i = 0; i < numberBtn.length; i++) {
@@ -23,20 +20,22 @@ for (let i = 0; i < operatorBtn.length; i++) {
    operatorBtn[i].addEventListener('click', operators);
 }
 
-function reset() {
+resetBtn.addEventListener('click', () => {
    digit = '0';
    //pendingDigit = undefined;
    stringArray = [];
 
    display.innerText = digit;
-}
+});
 
-function backspace() {
+backspaceBtn.addEventListener('click', () => {
    let digitLength = digit.length;
 
-   if (stringArray.includes('+') || stringArray.includes('-') || stringArray.includes('*') || stringArray.includes('/')) {
+   if (isOperatorInArray()) {
       stringArray.pop();
-      display.innerText = '';//stringArray;
+      digit = '' + stringArray;
+      display.innerText = stringArray;//'';//stringArray;
+      stringArray = [];
    }
    else {
       digit = digit.slice(0, digitLength - 1);
@@ -47,15 +46,14 @@ function backspace() {
       }
       display.innerText = digit;
    }
+});
 
-}
-
-function decimal(clickBtn) {
+decimalBtn.addEventListener('click', () => {
    if (!digit.includes('.'))
       digit += '.';
 
    display.innerText = digit;
-}
+});
 
 function numbers(clickBtn) {
    let numClicked = clickBtn.target.innerText;
@@ -67,10 +65,91 @@ function numbers(clickBtn) {
    display.innerText = digit;
 }
 
+function isOperatorInArray() {
+   return stringArray.length != 0 && symbols.some(arr => stringArray[stringArray.length - 1].includes(arr));
+}
+
+function isOperatorOnDisplay() {
+   return symbols.some(arr => display.innerText.includes(arr));
+}
+
+function pushValue(operator) {
+   stringArray.push(display.innerText);
+   stringArray.push(operator);
+   digit = '';
+   display.innerText = operator;
+}
+
+function popFirstThenPush(operator) {
+   stringArray.pop();
+   stringArray.push(operator);
+   digit = '';
+   display.innerText = operator;
+}
+
 function operators(clickBtn) {
    let operator = clickBtn.target.innerText;
+   //console.log(symbols.some(arr => stringArray.includes(arr)));
 
-   if (stringArray.includes('+') || stringArray.includes('-') || stringArray.includes('*') || stringArray.includes('/')) {
+   switch (operator) {
+      case '+':
+         //pendingDigit = display.innerText;
+         if (isOperatorOnDisplay()) {
+            popFirstThenPush('+');
+         }
+         else {
+            pushValue('+');
+         }
+         break;
+      case '−':
+         if (isOperatorOnDisplay()) {
+            popFirstThenPush('-');
+         }
+         else {
+            pushValue('-');
+         }
+         break;
+      case '×':
+         if (isOperatorOnDisplay()) {
+            popFirstThenPush('*');
+         }
+         else {
+            pushValue('*');
+         }
+         break;
+      case '÷':
+         if (isOperatorOnDisplay()) {
+            popFirstThenPush('/');
+         }
+         else {
+            pushValue('/');
+         }
+         break;
+      case '=':
+         //pendingDigit = display.innerText;
+         if (isOperatorOnDisplay()) {
+         }
+         else {
+            stringArray.push(display.innerText);
+            let totals = eval(stringArray.join(' '));
+            digit = '0';
+            stringArray = [];
+            display.innerText = totals;
+         }
+         break;
+      default:
+         break;
+   }
+   console.log(stringArray)
+}
+
+/* function operators(clickBtn) {
+   let operator = clickBtn.target.innerText;
+   let symbols = ['+', '-', '*', '/'];
+
+   //console.log(symbols.some(arr => stringArray.includes(arr)));
+
+   if (symbols.some(arr => stringArray.includes(arr))) {
       switch (operator) {
          case '=':
             //pendingDigit = display.innerText;
@@ -123,4 +202,4 @@ function operators(clickBtn) {
             break;
       }
    }
-}
+} */
