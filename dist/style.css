@@ -1,0 +1,61 @@
+body {
+   font-family: Arial, Helvetica, sans-serif;
+   height: 100vh;
+   background-color: rgb(38, 39, 39);
+   color: white;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   justify-items: center;
+   -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+h1 {
+   text-align: center;
+}
+
+#calculator {
+   margin-left: calc(50% - 100px);
+}
+
+.row {
+   display: table;
+   table-layout: fixed;
+   width: 200px;
+}
+
+.column {
+   display: table-cell;
+}
+
+.btn {
+   width: 25px;
+   height: 50px;
+   background-color: white;
+   color: black;
+   border: 1px solid gray;
+   text-align: center;
+   cursor: pointer;
+}
+
+#display {
+   text-align: right;
+   background: rgb(69, 69, 69);
+   height: 60px;
+   font-size: 42px;
+   overflow: hidden;
+}
+
+#reset {
+   width: 52px;
+}
+
+#equal {
+   width: 50px;
+}
