@@ -8,41 +8,63 @@
    <link rel="stylesheet" type="text/css" media="screen" href="style.css">
 </head>
 <body>
-   <h1>Calculator</h1>
-   <div id="calculator">
-      <div class="row">
-         <div class="column" id="display">0</div>
-      </div>
-      <div class="row">
-         <div class="btn column" id="reset">AC</div>
-         <div class="btn column" id="backspace">&#8676;</div>
-         <div class="btn operator column" id="divide">&divide;</div>
-      </div>
-      <div class="row">
-         <div class="btn number column" id="seven">7</div>
-         <div class="btn number column" id="eight">8</div>
-         <div class="btn number column" id="nine">9</div>
-         <div class="btn operator column" id="multiply">&times;</div>
-      </div>
-      <div class="row">
-         <div class="btn number column" id="four">4</div>
-         <div class="btn number column" id="five">5</div>
-         <div class="btn number column" id="six">6</div>
-         <div class="btn operator column" id="minus">&minus;</div>
-      </div>
-      <div class="row">
-         <div class="btn number column" id="one">1</div>
-         <div class="btn number column" id="two">2</div>
-         <div class="btn number column" id="three">3</div>
-         <div class="btn operator column" id="plus">&plus;</div>
-      </div>
-      <div class="row">
-         <div class="btn number column" id="zero">0</div>
-         <div class="btn column" id="decimal">.</div>
-         <div class="btn operator column" id="equal">&equals;</div>
+   <div id="theCalcDiv">
+      <h1 id="pgTitle">Calculator</h1>
+      <div id="calculator">
+         <div class="row">
+            <div class="column" id="display">0</div>
+         </div>
+         <div class="row">
+            <div class="btn column" id="reset">AC</div>
+            <div class="btn column" id="backspace">&#8676;</div>
+            <div class="btn operator column" id="divide">&divide;</div>
+         </div>
+         <div class="row">
+            <div class="btn number column" id="seven">7</div>
+            <div class="btn number column" id="eight">8</div>
+            <div class="btn number column" id="nine">9</div>
+            <div class="btn operator column" id="multiply">&times;</div>
+         </div>
+         <div class="row">
+            <div class="btn number column" id="four">4</div>
+            <div class="btn number column" id="five">5</div>
+            <div class="btn number column" id="six">6</div>
+            <div class="btn operator column" id="minus">&minus;</div>
+         </div>
+         <div class="row">
+            <div class="btn number column" id="one">1</div>
+            <div class="btn number column" id="two">2</div>
+            <div class="btn number column" id="three">3</div>
+            <div class="btn operator column" id="plus">&plus;</div>
+         </div>
+         <div class="row">
+            <div class="btn number column" id="zero">0</div>
+            <div class="btn column" id="decimal">.</div>
+            <div class="btn operator column" id="equal">&equals;</div>
+         </div>
       </div>
    </div>
 
+   <div id="discountDiv">
+      <h1>Discount Calculator</h1>
+      <input type="number" class="d-calc" id="priceBefore" placeholder="Actual Price">
+      <br>
+      <input type="number" class="d-calc" id="discount" placeholder="Discount %">
+      <br>
+      <input type="text" class="d-calc" id="saved" placeholder="You save" readonly>
+      <br>
+      <input type="text" class="d-calc" id="priceAfter" placeholder="Price after Discount" readonly>
+      <br><br>
+      <input type="button" id="calculate" value="Calculate">
+   </div>
+
+   <label class="switch">
+      <input type="checkbox" id="toggle">
+      <span class="slider round"></span>
+   </label>
+   <br><br>
+
    <script src="calculator.js"></script>
+   <script src="discount-calc.js"></script>
 </body>
 </html>

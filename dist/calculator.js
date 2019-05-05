@@ -5,11 +5,12 @@ const display = document.getElementById('display');
 
 const numberBtn = document.getElementsByClassName('btn number');
 const operatorBtn = document.getElementsByClassName('btn operator');
+const symbols = ['+', '-', '*', '/'];
+const normalFontSize = 42 + 'px';
 
 var digit = '0';
 //var pendingDigit;
 var stringArray = [];
-const symbols = ['+', '-', '*', '/'];
 
 // adding click event listener to each button
 for (let i = 0; i < numberBtn.length; i++) {
@@ -25,20 +26,23 @@ resetBtn.addEventListener('click', () => {
    //pendingDigit = undefined;
    stringArray = [];
 
+   display.style.fontSize = normalFontSize;
+
    display.innerText = digit;
 });
 
 backspaceBtn.addEventListener('click', () => {
    let digitLength = digit.length;
 
-   if (isOperatorInArray()) {
+   if (isOperatorInArray() && isOperatorOnDisplay()) {
+      // delete the operator from the array first, then show the numbers back
       stringArray.pop();
       digit = '' + stringArray;
-      display.innerText = stringArray;//'';//stringArray;
-      stringArray = [];
+      display.innerText = stringArray;
+      stringArray = []; // empty out the array to avoid error of duplicates
    }
    else {
-      digit = digit.slice(0, digitLength - 1);
+      digit = digit.slice(0, digitLength - 1); // slice the most recent number
 
       if (digit === '') {
          digit = '0';
@@ -57,6 +61,7 @@ decimalBtn.addEventListener('click', () => {
 
 function numbers(clickBtn) {
    let numClicked = clickBtn.target.innerText;
+   display.style.fontSize = normalFontSize;
 
    if (digit === '0')
       digit = '';
@@ -70,14 +75,23 @@ function isOperatorInArray() {
 }
 
 function isOperatorOnDisplay() {
-   return symbols.some(arr => display.innerText.includes(arr));
+   //return symbols.some(arr => display.innerText.includes(arr));
+
+   if (symbols.some(symbl => display.innerText.includes(symbl))) {
+      if (display.innerText.includes('-') && !isOperatorInArray())
+         return false;
+      else 
+         return true;
+   }
+   else 
+      return false;
 }
 
 function pushValue(operator) {
    stringArray.push(display.innerText);
    stringArray.push(operator);
    digit = '';
-   display.innerText = operator;
+   display.innerText = operator; //stringArray.join(" ");
 }
 
 function popFirstThenPush(operator) {
@@ -134,14 +148,24 @@ function operators(clickBtn) {
             let totals = eval(stringArray.join(' '));
             digit = '0';
             stringArray = [];
+   
+            checkForOverflow(totals);
             display.innerText = totals;
          }
          break;
       default:
          break;
    }
-   console.log(stringArray)
+   console.log(stringArray);
 }
+
+function checkForOverflow(totals) {
+   if(totals.toString().length > 8) {
+      display.style.fontSize = 22 + 'px';
+   }
+   //console.log(totals.toString().length);
+}
+
 
 /* function operators(clickBtn) {
    let operator = clickBtn.target.innerText;
